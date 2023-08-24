@@ -2,10 +2,15 @@ import { View, Text, TextInput, StyleSheet } from "react-native";
 import { COLORS, SIZES, PADDING } from "../constants/theme";
 import { useState } from "react";
 
-const InputText = ({ value, setValue, placeholder }) => {
+const InputText = ({ type, value, setValue, placeholder }) => {
     const [isFocus, setIsFocus] = useState(false);
+    const BlurInput = (e) => {
+        if (e.key === "Enter") {
+            e.target.blur();
+        }
+    };
     return (
-        <View style={{ marginBottom: SIZES.l3 }}>
+        <View style={{ marginBottom: SIZES.dp3 }}>
             <TextInput
                 onFocus={() => {
                     setIsFocus(true);
@@ -13,10 +18,15 @@ const InputText = ({ value, setValue, placeholder }) => {
                 onBlur={() => {
                     setIsFocus(false);
                 }}
+                onKeyPress={BlurInput}
                 onChangeText={(text) => setValue(text)}
                 value={value}
                 placeholder={placeholder}
                 style={!isFocus ? styles.textInput : styles.textInput_focus}
+                autoCapitalize={"none"}
+                autoComplete={"off"}
+                autoCorrect={false}
+                secureTextEntry={type === "pw" ? true : false}
             />
         </View>
     );
@@ -24,22 +34,22 @@ const InputText = ({ value, setValue, placeholder }) => {
 
 const styles = StyleSheet.create({
     textInput: {
-        padding: SIZES.l4,
-        paddingLeft: SIZES.l6,
-        paddingRight: SIZES.l6åß,
+        padding: SIZES.dp4,
+        paddingLeft: SIZES.dp6,
+        paddingRight: SIZES.dp6,
         backgroundColor: COLORS.gray1,
-        borderRadius: SIZES.l10,
-        fontSize: SIZES.l4,
+        borderRadius: SIZES.dp10,
+        fontSize: SIZES.dp4,
     },
     textInput_focus: {
-        padding: SIZES.l4 - 1,
-        paddingLeft: SIZES.l6 - 1,
-        paddingRight: SIZES.l6 - 1,
+        padding: SIZES.dp4 - 1,
+        paddingLeft: SIZES.dp6 - 1,
+        paddingRight: SIZES.dp6 - 1,
         backgroundColor: COLORS.gray0,
         borderWidth: 1,
         borderColor: COLORS.black,
-        borderRadius: SIZES.l10,
-        fontSize: SIZES.l4,
+        borderRadius: SIZES.dp10,
+        fontSize: SIZES.dp4,
     },
 });
 

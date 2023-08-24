@@ -1,50 +1,125 @@
 import { View, Text, StyleSheet } from "react-native";
 import { COLORS, SIZES } from "../constants/theme";
 
-const Title = ({ text }) => {
+const Title = ({ text, colorScheme }) => {
     return (
         <View>
-            <Text style={styles.title}>{text}</Text>
+            <Text
+                style={
+                    colorScheme === "dark"
+                        ? stylesDark.title
+                        : stylesLight.title
+                }
+            >
+                {text}
+            </Text>
         </View>
     );
 };
 
-const SubTitle = ({ text }) => {
+const SubTitle = ({ text, colorScheme }) => {
     return (
         <View>
-            <Text style={styles.subTitle}>{text}</Text>
+            <Text
+                style={
+                    colorScheme === "dark"
+                        ? stylesDark.subTitle
+                        : stylesLight.subTitle
+                }
+            >
+                {text}
+            </Text>
         </View>
     );
 };
 
-const ErrText = ({ text }) => {
+const ContentTitle = ({ text, colorScheme }) => {
     return (
         <View>
-            <Text style={styles.errText}>{text}</Text>
+            <Text
+                style={
+                    colorScheme === "dark"
+                        ? stylesDark.contentTitle
+                        : stylesLight.contentTitle
+                }
+            >
+                {text}
+            </Text>
         </View>
     );
 };
 
-const styles = StyleSheet.create({
+const ErrText = ({ text, colorScheme }) => {
+    return (
+        <View>
+            <Text
+                style={
+                    colorScheme === "dark"
+                        ? stylesDark.errText
+                        : stylesLight.errText
+                }
+            >
+                {text}
+            </Text>
+        </View>
+    );
+};
+const stylesLight = StyleSheet.create({
     title: {
-        marginBottom: SIZES.l2,
-        fontSize: SIZES.l9,
+        marginBottom: SIZES.dp2,
+        fontSize: SIZES.dp9,
         fontFamily: "bold",
         color: COLORS.black,
     },
     subTitle: {
-        marginBottom: SIZES.l8,
-        fontSize: SIZES.l4,
+        marginBottom: SIZES.dp8,
+        fontSize: SIZES.dp4,
         fontFamily: "regular",
         color: COLORS.gray4,
     },
+    contentTitle: {
+        marginTop: SIZES.dp4,
+        marginBottom: SIZES.dp2,
+        fontSize: SIZES.dp7,
+        fontFamily: "semibold",
+        color: COLORS.gray6,
+    },
     errText: {
-        marginBottom: SIZES.l4,
-        fontSize: SIZES.l4,
+        marginBottom: SIZES.dp4,
+        fontSize: SIZES.dp4,
         fontFamily: "medium",
         color: COLORS.danger,
         textAlign: "center",
     },
 });
 
-export { Title, SubTitle, ErrText };
+const stylesDark = StyleSheet.create({
+    title: {
+        marginBottom: SIZES.dp2,
+        fontSize: SIZES.dp9,
+        fontFamily: "bold",
+        color: COLORS.white,
+    },
+    subTitle: {
+        marginBottom: SIZES.dp8,
+        fontSize: SIZES.dp4,
+        fontFamily: "regular",
+        color: COLORS.gray2,
+    },
+    contentTitle: {
+        marginTop: SIZES.dp4,
+        marginBottom: SIZES.dp2,
+        fontSize: SIZES.dp7,
+        fontFamily: "semibold",
+        color: COLORS.gray0,
+    },
+    errText: {
+        marginBottom: SIZES.dp4,
+        fontSize: SIZES.dp4,
+        fontFamily: "medium",
+        color: COLORS.danger,
+        textAlign: "center",
+    },
+});
+
+export { Title, SubTitle, ContentTitle, ErrText };

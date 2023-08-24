@@ -1,0 +1,10 @@
+const ICON1 = require("./pic1.png");
+const ICON2 = require("./pic2.png");
+const ICON3 = require("./pic3.png");
+const ICON4 = require("./pic4.png");
+const ICON5 = require("./pic5.png");
+const ICON6 = require("./pic6.png");
+const ICON7 = require("./pic7.png");
+const ICON8 = require("./pic8.png");
+const ICONBACK = require("./back.png");
+export { ICON1, ICON2, ICON3, ICON4, ICON5, ICON6, ICON7, ICON8, ICONBACK };

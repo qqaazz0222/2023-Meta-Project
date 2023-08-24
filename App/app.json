@@ -1,13 +1,11 @@
 {
-  "expo": {
-    "scheme": "acme",
-    "web": {
-      "bundler": "metro"
-    },
-    "plugins": [
-      "expo-router"
-    ],
-    "name": "metaProject",
-    "slug": "metaProject"
-  }
+    "expo": {
+        "scheme": "acme",
+        "web": {
+            "bundler": "metro"
+        },
+        "plugins": ["expo-router", "expo-location"],
+        "name": "metaProject",
+        "slug": "metaProject"
+    }
 }
