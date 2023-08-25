@@ -22,11 +22,18 @@ const SignUp = () => {
     const [pwConfirm, setPwConfirm] = useState("");
     const [name, setName] = useState("");
     const [err, setErr] = useState("");
+    const InitState = () => {
+        setEmail("");
+        setPw("");
+        setPwConfirm("");
+        setName("");
+        setErr("");
+    };
+
     const SignIn = async () => {
         const res = await ApiSignUp(email, pw, pwConfirm, name);
         if (res.state === 200) {
-            setErr("");
-            console.log("회원가입 성공");
+            InitState();
             Alert.alert("회원가입 성공", "로그인 후, 서비스를 이용해보세요.");
             navigation.navigate("signin");
         } else {
@@ -83,6 +90,7 @@ const SignUp = () => {
                                 width: "100%",
                                 textAlign: "center",
                             }}
+                            onPress={InitState}
                         >
                             로그인
                         </Link>

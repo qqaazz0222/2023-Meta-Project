@@ -18,8 +18,8 @@ const FullButton = ({ text, onPress, colorScheme }) => {
                 <Text
                     style={
                         colorScheme === "dark"
-                            ? stylesLight.text2
-                            : stylesDark.text2
+                            ? stylesDark.text2
+                            : stylesLight.text2
                     }
                 >
                     {text}
@@ -359,7 +359,7 @@ const stylesDark = StyleSheet.create({
         fontFamily: "bold",
     },
     text2: {
-        color: COLORS.white,
+        color: COLORS.black,
         fontSize: SIZES.dp5,
         fontFamily: "bold",
     },

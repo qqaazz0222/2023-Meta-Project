@@ -11,7 +11,7 @@ import { ICON7 } from "../assets/images/images";
 
 const Acceler = () => {
     const [isTesting, setIsTesting] = useState(false);
-    const [{ x, y, z }, setData] = useState({
+    const [data, setData] = useState({
         x: 0,
         y: 0,
         z: 0,
@@ -57,12 +57,16 @@ const Acceler = () => {
                 <ThreeCard
                     icon={[ICON7, ICON7, ICON7]}
                     text={["X", "Y", "Z"]}
-                    val={[x.toFixed(2), y.toFixed(2), z.toFixed(2)]}
+                    val={[
+                        data.x.toFixed(2),
+                        data.y.toFixed(2),
+                        data.z.toFixed(2),
+                    ]}
                 />
                 <ContentTitle text={"상세 정보"} />
-                <Text style={styles.text}>X : {x}</Text>
-                <Text style={styles.text}>Y : {y}</Text>
-                <Text style={styles.text}>Z : {z}</Text>
+                <Text style={styles.text}>X : {data.x}</Text>
+                <Text style={styles.text}>Y : {data.y}</Text>
+                <Text style={styles.text}>Z : {data.z}</Text>
             </View>
             <View style={{ paddingLeft: SIZES.dp6, paddingRight: SIZES.dp6 }}>
                 <FullButton

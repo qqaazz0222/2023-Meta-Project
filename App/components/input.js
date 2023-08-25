@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.gray1,
         borderRadius: SIZES.dp10,
         fontSize: SIZES.dp4,
+        overflow: "hidden",
     },
     textInput_focus: {
         padding: SIZES.dp4 - 1,
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
         borderColor: COLORS.black,
         borderRadius: SIZES.dp10,
         fontSize: SIZES.dp4,
+        overflow: "hidden",
     },
 });
 

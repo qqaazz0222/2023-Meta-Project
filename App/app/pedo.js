@@ -39,7 +39,7 @@ const Pedo = () => {
     };
     useEffect(() => {
         const subscription = _subscribe();
-        return () => subscription && subscription.remove();
+        return () => subscription;
     }, []);
     useEffect(() => {
         Appearance.setColorScheme("light");

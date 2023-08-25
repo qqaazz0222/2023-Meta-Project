@@ -1,41 +1,43 @@
 import { useEffect, useState, useContext } from "react";
-import { View, SafeAreaView, StyleSheet, ScrollView } from "react-native";
-import { Stack } from "expo-router";
+import {
+    View,
+    SafeAreaView,
+    Appearance,
+    StyleSheet,
+    ScrollView,
+} from "react-native";
+import { Link, Stack, useRouter } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
-import { Title } from "../components/text";
+import { SubTitleNM, Title } from "../components/text";
 import { COLORS, FONTS, SIZES } from "../constants/theme";
 import { BackButton } from "../components/button";
-import { ApiReceiveHistoryList } from "../api/historyApi";
-import { FullCard } from "../components/card";
-import { Loading } from "../components/loading";
-import { UserContext } from "../context/userContext";
 import { HistoryContext } from "../context/historyContext";
+import { ApiReceiveHistoryDetail } from "../api/historyApi";
+import { FullDetailCard } from "../components/card";
+import { Loading } from "../components/loading";
+import moment from "moment";
 
 const History = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const navigation = useNavigation();
-    const { userData, setUserData } = useContext(UserContext);
     const { historyData, setHistoryData } = useContext(HistoryContext);
-    const [historyList, setHistoryList] = useState([]);
-    const RequestHistoryList = async () => {
-        const data = await ApiReceiveHistoryList(userData.email);
+    const [historyDetailList, setHistoryDetailList] = useState([]);
+    const RequestHistoryDetail = async () => {
+        const id = historyData.id;
+        const data = await ApiReceiveHistoryDetail(id);
         setIsLoading(false);
-        if (data.state === 200) {
-            setHistoryList(data.data);
-        }
-    };
-    const ShowDetail = (idx) => {
-        console.log(historyList[idx]);
-        setHistoryData(historyList[idx]);
-        navigation.navigate("hdetail");
+        setHistoryDetailList(data.data);
     };
     useEffect(() => {
-        RequestHistoryList();
+        RequestHistoryDetail();
     }, []);
+    moment.locale("ko");
+    const tempDate = new Date(Date.parse(historyData.date));
+    const koDate = moment(tempDate).format("YYYY년 MM월 DD일");
+    const koTime = moment(tempDate).format("HH시 mm분 ss초");
     return (
         <View style={{ flex: 1 }}>
             <SafeAreaView
-                style={{ height: 180, backgroundColor: COLORS.white }}
+                style={{ height: 240, backgroundColor: COLORS.white }}
             >
                 <Stack.Screen
                     options={{
@@ -46,23 +48,17 @@ const History = () => {
                 />
                 <View style={styles.headerView}>
                     <BackButton />
-                    <Title text={"기록"} />
+                    <Title text={koDate} />
+                    <SubTitleNM text={"시작 시간 : " + koTime} />
+                    <SubTitleNM text={historyData.id} />
                 </View>
             </SafeAreaView>
-
             {isLoading ? (
                 <Loading style={{ flex: 1 }} text={"데이터 불러오는 중"} />
             ) : (
                 <ScrollView style={styles.listView}>
-                    {historyList.map((item, idx) => (
-                        <FullCard
-                            date={item.date}
-                            id={item.id}
-                            key={idx}
-                            onPress={() => {
-                                ShowDetail(idx);
-                            }}
-                        />
+                    {historyDetailList.map((item, idx) => (
+                        <FullDetailCard data={item} key={idx} />
                     ))}
                 </ScrollView>
             )}

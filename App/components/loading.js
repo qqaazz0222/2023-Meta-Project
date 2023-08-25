@@ -12,12 +12,13 @@ const Loading = ({ text }) => {
 
 const styles = StyleSheet.create({
     loadingWrap: {
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        width: "100%",
-        height: "100%",
+        maxWidth: "100%",
+        maxHeight: "100%",
         backgroundColor: COLORS.black,
-        opacity: 0.8,
+        opacity: 0.5,
     },
     text: {
         marginTop: SIZES.dp3,

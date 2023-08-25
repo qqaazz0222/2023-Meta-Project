@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
     View,
     SafeAreaView,
@@ -14,19 +14,25 @@ import { FullButton } from "../components/button";
 import { ApiSignIn } from "../api/signApi";
 import { useNavigation } from "@react-navigation/native";
 import { SpacerAuto } from "../components/spacer";
+import { UserContext } from "../context/userContext";
 
 const SignIn = () => {
+    const { userData, setUserData } = useContext(UserContext);
     const navigation = useNavigation();
-    // const router = useRouter();
     const [email, setEmail] = useState("");
     const [pw, setPw] = useState("");
     const [err, setErr] = useState("");
+    const InitState = () => {
+        setEmail("");
+        setPw("");
+        setErr("");
+    };
     const SignIn = async () => {
         const res = await ApiSignIn(email, pw);
         if (res.state === 200) {
-            setErr("");
-            console.log("로그인 성공");
-            Alert.alert("로그인 성공", "홍길동님 환영합니다.");
+            InitState();
+            setUserData(res.data);
+            Alert.alert("로그인 성공", `${res.data.name}님 환영합니다.`);
             navigation.navigate("index");
         } else {
             console.log("로그인 실패");
@@ -70,6 +76,7 @@ const SignIn = () => {
                         <Link
                             href="/signup"
                             style={{ width: "100%", textAlign: "center" }}
+                            onPress={InitState}
                         >
                             회원가입
                         </Link>

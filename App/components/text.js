@@ -33,6 +33,22 @@ const SubTitle = ({ text, colorScheme }) => {
     );
 };
 
+const SubTitleNM = ({ text, colorScheme }) => {
+    return (
+        <View>
+            <Text
+                style={
+                    colorScheme === "dark"
+                        ? stylesDark.subTitleNM
+                        : stylesLight.subTitleNM
+                }
+            >
+                {text}
+            </Text>
+        </View>
+    );
+};
+
 const ContentTitle = ({ text, colorScheme }) => {
     return (
         <View>
@@ -64,6 +80,22 @@ const ErrText = ({ text, colorScheme }) => {
         </View>
     );
 };
+
+const CodeText = ({ text, colorScheme }) => {
+    return (
+        <View>
+            <Text
+                style={
+                    colorScheme === "dark"
+                        ? stylesDark.codeText
+                        : stylesLight.codeText
+                }
+            >
+                {text}
+            </Text>
+        </View>
+    );
+};
 const stylesLight = StyleSheet.create({
     title: {
         marginBottom: SIZES.dp2,
@@ -77,12 +109,24 @@ const stylesLight = StyleSheet.create({
         fontFamily: "regular",
         color: COLORS.gray4,
     },
+    subTitleNM: {
+        fontSize: SIZES.dp4,
+        fontFamily: "regular",
+        color: COLORS.gray4,
+    },
     contentTitle: {
         marginTop: SIZES.dp4,
         marginBottom: SIZES.dp2,
         fontSize: SIZES.dp7,
         fontFamily: "semibold",
         color: COLORS.gray6,
+    },
+    codeText: {
+        marginBottom: SIZES.dp2,
+        fontSize: SIZES.dp3,
+        color: COLORS.black,
+        textAlign: "left",
+        fontFamily: "code",
     },
     errText: {
         marginBottom: SIZES.dp4,
@@ -106,12 +150,24 @@ const stylesDark = StyleSheet.create({
         fontFamily: "regular",
         color: COLORS.gray2,
     },
+    subTitleNM: {
+        fontSize: SIZES.dp4,
+        fontFamily: "regular",
+        color: COLORS.gray2,
+    },
     contentTitle: {
         marginTop: SIZES.dp4,
         marginBottom: SIZES.dp2,
         fontSize: SIZES.dp7,
         fontFamily: "semibold",
         color: COLORS.gray0,
+    },
+    codeText: {
+        marginBottom: SIZES.dp2,
+        fontSize: SIZES.dp3,
+        color: COLORS.white,
+        textAlign: "left",
+        fontFamily: "code",
     },
     errText: {
         marginBottom: SIZES.dp4,
@@ -122,4 +178,4 @@ const stylesDark = StyleSheet.create({
     },
 });
 
-export { Title, SubTitle, ContentTitle, ErrText };
+export { Title, SubTitle, SubTitleNM, ContentTitle, CodeText, ErrText };
