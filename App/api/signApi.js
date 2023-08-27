@@ -1,5 +1,6 @@
 import axios from "axios";
-import { API } from "@env";
+// import { API } from "@env";
+const API = "http://3.34.190.251:3000/";
 
 const ApiSignIn = async (email, pw) => {
     if (email !== "" && pw !== "") {
