@@ -26,6 +26,13 @@ const InputText = ({ type, value, setValue, placeholder }) => {
                 autoCapitalize={"none"}
                 autoComplete={"off"}
                 autoCorrect={false}
+                textContentType={
+                    type === "pw"
+                        ? "oneTimeCode"
+                        : type === "email"
+                        ? "emailAddress"
+                        : "none"
+                }
                 secureTextEntry={type === "pw" ? true : false}
             />
         </View>

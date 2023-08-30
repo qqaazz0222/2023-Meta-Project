@@ -3,7 +3,7 @@ import { View, SafeAreaView, Appearance, StyleSheet } from "react-native";
 import { Link, Stack, useRouter } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
 import { Title } from "../components/text";
-import { COLORS, FONTS, SIZES } from "../constants/theme";
+import { COLORS, Margin, SIZES } from "../constants/theme";
 
 const Setting = () => {
     useEffect(() => {
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: SIZES.dp6,
         backgroundColor: COLORS.white,
+        marginTop: Margin.safeAreaMargin,
     },
 });
 

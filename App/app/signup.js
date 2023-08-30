@@ -64,6 +64,7 @@ const SignUp = () => {
                     {err ? <ErrText text={err} /> : <></>}
                     <View style={{ marginBottom: SIZES.dp4 }}>
                         <InputText
+                            type={"email"}
                             placeholder={"이메일을 입력해주세요."}
                             setValue={setEmail}
                         />

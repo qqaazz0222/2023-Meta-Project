@@ -9,7 +9,7 @@ import {
 import { Link, Stack, useRouter } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
 import { SubTitleNM, Title } from "../components/text";
-import { COLORS, FONTS, SIZES } from "../constants/theme";
+import { COLORS, Margin, SIZES } from "../constants/theme";
 import { BackButton } from "../components/button";
 import { HistoryContext } from "../context/historyContext";
 import { ApiReceiveHistoryDetail } from "../api/historyApi";
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
         borderBottomColor: COLORS.gray1,
         borderBottomWidth: 1,
         zIndex: 1,
+        marginTop: Margin.safeAreaMargin,
     },
     listView: {
         paddingTop: SIZES.dp2,

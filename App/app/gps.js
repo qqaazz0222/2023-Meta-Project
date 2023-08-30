@@ -5,7 +5,7 @@ import * as Location from "expo-location";
 import MapView, { Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
 import { Title, SubTitle } from "../components/text";
-import { COLORS, FONTS, SIZES } from "../constants/theme";
+import { COLORS, FONTS, Margin, SIZES } from "../constants/theme";
 import { BackButton } from "../components/button";
 import { Loading } from "../components/loading";
 
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
         height: SIZES.dp16,
         padding: SIZES.dp6,
         backgroundColor: COLORS.white,
+        marginTop: Margin.safeAreaMargin,
     },
     map: {
         width: "100%",

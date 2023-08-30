@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Stack } from "expo-router";
 import { CodeText, SubTitleNM, Title } from "../components/text";
-import { COLORS, FONTS, SIZES } from "../constants/theme";
+import { COLORS, Margin, SIZES } from "../constants/theme";
 import { SpacerAuto } from "../components/spacer";
 import { BackButton, FullButton } from "../components/button";
 import {
@@ -234,6 +234,7 @@ const styles = StyleSheet.create({
     headerView: {
         padding: SIZES.dp6,
         backgroundColor: COLORS.white,
+        marginTop: Margin.safeAreaMargin,
     },
 });
 

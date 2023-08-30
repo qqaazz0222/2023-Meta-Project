@@ -16,7 +16,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import * as Location from "expo-location";
 import { Link, Stack, useRouter } from "expo-router";
-import { COLORS, FONTS, SIZES } from "../constants/theme";
+import { COLORS, Margin, SIZES } from "../constants/theme";
 import { Title, SubTitle, ErrText } from "../components/text";
 import { SpacerAuto } from "../components/spacer";
 import { FullButton, TwoTwoButton } from "../components/button";
@@ -50,7 +50,9 @@ const Main = () => {
             />
             {userData ? (
                 <View style={{ flex: 1 }}>
-                    <SafeAreaView style={{ flex: 1 }}>
+                    <SafeAreaView
+                        style={{ flex: 1, marginTop: Margin.safeAreaMargin }}
+                    >
                         <View style={{ flex: 1, padding: SIZES.dp6 }}>
                             <Title text={"기능 목록"} colorScheme={"dark"} />
 

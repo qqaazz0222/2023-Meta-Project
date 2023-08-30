@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { UserContext } from "../context/userContext";
 import { HistoryContext } from "../context/historyContext";
+import { StyleSheet } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 const Layout = () => {

@@ -3,7 +3,7 @@ import { View, SafeAreaView, Appearance, StyleSheet } from "react-native";
 import { Link, Stack, useRouter } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
 import { SubTitle, Title } from "../components/text";
-import { COLORS, FONTS, SIZES } from "../constants/theme";
+import { COLORS, FONTS, Margin, SIZES } from "../constants/theme";
 import { BackButton, TwoTwoButton } from "../components/button";
 import { ICON5, ICON6, ICON7, ICON8 } from "../assets/images/images";
 
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: SIZES.dp6,
         backgroundColor: COLORS.white,
+        marginTop: Margin.safeAreaMargin,
     },
 });
 

@@ -3,7 +3,7 @@ import { Text, View, SafeAreaView, Appearance, StyleSheet } from "react-native";
 import { Link, Stack, useRouter } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
 import { Title, SubTitle, ContentTitle } from "../components/text";
-import { COLORS, FONTS, SIZES } from "../constants/theme";
+import { COLORS, Margin, SIZES } from "../constants/theme";
 import { BackButton, FullButton } from "../components/button";
 import { Accelerometer } from "expo-sensors";
 import { ThreeCard } from "../components/card";
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: SIZES.dp6,
         backgroundColor: COLORS.white,
+        marginTop: Margin.safeAreaMargin,
     },
     text: {
         marginBottom: SIZES.dp2,
