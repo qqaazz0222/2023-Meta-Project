@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
     View,
     Text,
@@ -14,6 +13,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import * as SecureStore from "expo-secure-store";
 import * as Location from "expo-location";
 import { Link, Stack, useRouter } from "expo-router";
 import { COLORS, Margin, SIZES } from "../constants/theme";
@@ -22,10 +22,27 @@ import { SpacerAuto } from "../components/spacer";
 import { FullButton, TwoTwoButton } from "../components/button";
 import { ICON1, ICON2, ICON3, ICON4 } from "../assets/images/images";
 import { UserContext } from "../context/userContext";
+import { OneCard } from "../components/card";
+
+// 캐시 저장소 값 불러오기
+const getSecureStore = async (key) => {
+    let result = await SecureStore.getItemAsync(key);
+    return result;
+};
+// 캐시 저장소 값 설정
+const setSecureStore = async (key, value) => {
+    await SecureStore.setItemAsync(key, value);
+};
+// 캐시 저장소 값 삭제
+const delSecureStore = async (key) => {
+    await SecureStore.deleteItemAsync(key);
+};
 
 const Main = () => {
     const navigation = useNavigation();
+    const [_userData, _setUserData] = useState(null);
     const { userData, setUserData } = useContext(UserContext);
+    const [pedoData, setPedoData] = useState(0);
     const [uid, setUid] = useState("");
     const [location, setLocation] = useState();
     const [ok, setOk] = useState(true);
@@ -35,8 +52,27 @@ const Main = () => {
             setOk(false);
         }
     };
+    const getUserData = async () => {
+        const cacheEmail = await getSecureStore("email");
+        const cacheUname = await getSecureStore("uname");
+        if (cacheEmail !== null && cacheUname !== null) {
+            _setUserData({ email: cacheEmail, name: cacheUname });
+            setUserData({ email: cacheEmail, name: cacheUname });
+        }
+    };
+    const delUserData = async () => {
+        await delSecureStore("email");
+        await delSecureStore("uname");
+        navigation.reset({ routes: [{ name: "signin" }] });
+    };
+    const getPedoData = async () => {
+        const pedoData = await getSecureStore("pedo");
+        setPedoData(parseInt(pedoData));
+    };
     useEffect(() => {
         ask();
+        getUserData();
+        getPedoData();
     }, []);
 
     return (
@@ -48,7 +84,7 @@ const Main = () => {
                     header: () => <></>,
                 }}
             />
-            {userData ? (
+            {_userData ? (
                 <View style={{ flex: 1 }}>
                     <SafeAreaView
                         style={{ flex: 1, marginTop: Margin.safeAreaMargin }}
@@ -63,9 +99,16 @@ const Main = () => {
                                 colorScheme={"dark"}
                             />
                             <SpacerAuto />
+                            <OneCard
+                                text={[
+                                    "오늘의 미션",
+                                    "3000보 걷기",
+                                    `${pedoData}/3000`,
+                                ]}
+                                func={getPedoData}
+                            />
                         </View>
                     </SafeAreaView>
-
                     <View style={styles.buttonWrap}>
                         <TwoTwoButton
                             icon={[ICON1, ICON2, ICON3, ICON4]}
@@ -80,7 +123,8 @@ const Main = () => {
                                 navigation.navigate("history");
                             }}
                             onPress4={() => {
-                                navigation.navigate("setting");
+                                // navigation.navigate("setting");
+                                delUserData();
                             }}
                         />
                         <SpacerAuto />
@@ -88,7 +132,9 @@ const Main = () => {
                 </View>
             ) : (
                 <View style={{ flex: 1, backgroundColor: COLORS.white }}>
-                    <SafeAreaView style={{ flex: 1 }}>
+                    <SafeAreaView
+                        style={{ flex: 1, marginTop: Margin.safeAreaMargin }}
+                    >
                         <View style={{ flex: 1, padding: SIZES.dp6 }}>
                             <Title text={"MetaProject."} />
 
@@ -106,7 +152,9 @@ const Main = () => {
                             <FullButton
                                 text={"로그인하기"}
                                 onPress={() => {
-                                    navigation.navigate("signin");
+                                    navigation.reset({
+                                        routes: [{ name: "signin" }],
+                                    });
                                 }}
                             />
                         </View>

@@ -4,6 +4,20 @@ import { COLORS, SIZES, PADDING } from "../constants/theme";
 import { SpacerAuto } from "./spacer";
 import moment from "moment";
 
+const OneCard = ({ text, func }) => {
+    return (
+        <View style={{ gap: SIZES.dp5 }}>
+            <View style={{ flexDirection: "row", gap: SIZES.dp5 }}>
+                <TouchableOpacity style={styles.oneCard} onPress={func}>
+                    <Text style={styles.text3}>{text[0]}</Text>
+                    <Text style={styles.text4}>{text[1]}</Text>
+                    <Text style={styles.text5}>{text[2]}</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
+};
+
 const TwoCard = ({ icon, text, val }) => {
     return (
         <View style={{ gap: SIZES.dp5 }}>
@@ -147,6 +161,14 @@ const styles = StyleSheet.create({
         borderBottomColor: COLORS.gray1,
         borderBottomWidth: 1,
     },
+    oneCard: {
+        width: "100%",
+        padding: SIZES.dp6,
+        paddingLeft: SIZES.dp6,
+        paddingRight: SIZES.dp6,
+        backgroundColor: COLORS.gray1,
+        borderRadius: SIZES.dp4,
+    },
     twoCard: {
         flex: 1,
         padding: SIZES.dp4 + 2,
@@ -175,6 +197,21 @@ const styles = StyleSheet.create({
         fontSize: SIZES.dp5,
         fontFamily: "bold",
     },
+    text3: {
+        color: COLORS.gray6,
+        fontSize: SIZES.dp4,
+        fontFamily: "semibold",
+    },
+    text4: {
+        color: COLORS.gray6,
+        fontSize: SIZES.dp8,
+        fontFamily: "bold",
+    },
+    text5: {
+        color: COLORS.gray4,
+        fontSize: SIZES.dp6,
+        fontFamily: "medium",
+    },
     value: {
         textAlign: "right",
         fontSize: SIZES.dp12,
@@ -187,4 +224,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export { TwoCard, ThreeCard, FullCard, FullDetailCard };
+export { OneCard, TwoCard, ThreeCard, FullCard, FullDetailCard };

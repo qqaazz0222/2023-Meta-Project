@@ -4,11 +4,6 @@ import { useState } from "react";
 
 const InputText = ({ type, value, setValue, placeholder }) => {
     const [isFocus, setIsFocus] = useState(false);
-    const BlurInput = (e) => {
-        if (e.key === "Enter") {
-            e.target.blur();
-        }
-    };
     return (
         <View style={{ marginBottom: SIZES.dp3 }}>
             <TextInput
@@ -18,22 +13,17 @@ const InputText = ({ type, value, setValue, placeholder }) => {
                 onBlur={() => {
                     setIsFocus(false);
                 }}
-                onKeyPress={BlurInput}
-                onChangeText={(text) => setValue(text)}
-                value={value}
+                onChangeText={(text) => {
+                    setValue(text);
+                }}
+                defaultValue={value ? value : null}
                 placeholder={placeholder}
                 style={!isFocus ? styles.textInput : styles.textInput_focus}
                 autoCapitalize={"none"}
                 autoComplete={"off"}
                 autoCorrect={false}
-                textContentType={
-                    type === "pw"
-                        ? "oneTimeCode"
-                        : type === "email"
-                        ? "emailAddress"
-                        : "none"
-                }
-                secureTextEntry={type === "pw" ? true : false}
+                textContentType={type}
+                blurOnSubmit={true}
             />
         </View>
     );

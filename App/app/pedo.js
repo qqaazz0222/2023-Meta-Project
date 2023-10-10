@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { Text, View, SafeAreaView, Appearance, StyleSheet } from "react-native";
+import {
+    Text,
+    View,
+    SafeAreaView,
+    Appearance,
+    StyleSheet,
+    Platform,
+} from "react-native";
+import * as SecureStore from "expo-secure-store";
 import { Link, Stack, useRouter } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
 import { Title, SubTitle } from "../components/text";
@@ -8,6 +16,14 @@ import { BackButton, FullButton } from "../components/button";
 import { Pedometer } from "expo-sensors";
 import { ICON8 } from "../assets/images/images";
 import { TwoCard } from "../components/card";
+
+const getSecureStore = async (key) => {
+    let result = await SecureStore.getItemAsync(key);
+    return result;
+};
+const setSecureStore = async (key, value) => {
+    await SecureStore.setItemAsync(key, value);
+};
 
 const Pedo = () => {
     const [isPedometerAvailable, setIsPedometerAvailable] =
@@ -24,18 +40,27 @@ const Pedo = () => {
             const start = new Date();
             start.setDate(end.getDate() - 1);
 
-            const pastStepCountResult = await Pedometer.getStepCountAsync(
-                start,
-                end
-            );
+            const pastStepCountResult =
+                Platform.OS === "ios"
+                    ? await Pedometer.getStepCountAsync(start, end)
+                    : { steps: "미지원" };
             if (pastStepCountResult) {
                 setPastStepCount(pastStepCountResult.steps);
             }
 
             return Pedometer.watchStepCount((result) => {
                 setCurrentStepCount(result.steps);
+                const preSteps = getPrePedo();
+                setSecureStore("pedo", (result.steps + preSteps).toString());
             });
         }
+    };
+    const getPrePedo = async () => {
+        const preSteps = await getSecureStore("pedo");
+        if (preSteps === null) {
+            setSecureStore("pedo", "0");
+        }
+        return parseInt(preSteps);
     };
     useEffect(() => {
         const subscription = _subscribe();

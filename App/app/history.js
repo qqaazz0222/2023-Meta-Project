@@ -11,6 +11,12 @@ import { Loading } from "../components/loading";
 import { UserContext } from "../context/userContext";
 import { HistoryContext } from "../context/historyContext";
 
+// 캐시 저장소 값 불러오기
+const getSecureStore = async (key) => {
+    let result = await SecureStore.getItemAsync(key);
+    return result;
+};
+
 const History = () => {
     const [isLoading, setIsLoading] = useState(true);
     const navigation = useNavigation();

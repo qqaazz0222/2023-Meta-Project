@@ -7,7 +7,7 @@ import {
     Alert,
 } from "react-native";
 import { Stack, Link, useRouter } from "expo-router";
-import { COLORS, SIZES } from "../constants/theme";
+import { COLORS, SIZES, Margin } from "../constants/theme";
 import { Title, SubTitle, ErrText } from "../components/text";
 import { InputText } from "../components/input";
 import { FullButton } from "../components/button";
@@ -47,7 +47,13 @@ const SignUp = () => {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={{ flex: 1 }}
         >
-            <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+            <SafeAreaView
+                style={{
+                    flex: 1,
+                    backgroundColor: COLORS.white,
+                    marginTop: Margin.safeAreaMargin,
+                }}
+            >
                 <Stack.Screen
                     options={{
                         headerStyle: { backgroundColor: COLORS.white },
@@ -64,21 +70,25 @@ const SignUp = () => {
                     {err ? <ErrText text={err} /> : <></>}
                     <View style={{ marginBottom: SIZES.dp4 }}>
                         <InputText
-                            type={"email"}
+                            type={"emailAddress"}
                             placeholder={"이메일을 입력해주세요."}
+                            value={email}
                             setValue={setEmail}
                         />
                         <InputText
-                            type={"pw"}
+                            type={"password"}
                             placeholder={"비밀번호를 입력해주세요."}
+                            value={pw}
                             setValue={setPw}
                         />
                         <InputText
-                            type={"pw"}
+                            type={"password"}
                             placeholder={"비밀번호를 한번 더 입력해주세요."}
+                            value={pwConfirm}
                             setValue={setPwConfirm}
                         />
                         <InputText
+                            type={"none"}
                             placeholder={"이름을 입력해주세요."}
                             setValue={setName}
                         />

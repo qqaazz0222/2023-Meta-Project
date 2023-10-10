@@ -57,27 +57,27 @@ const Gps = () => {
                         }
                     />
                 </View>
-            </SafeAreaView>
-            {latitude !== 0.0 && longitude !== 0.0 ? (
-                <MapView
-                    style={styles.map}
-                    initialRegion={{
-                        latitude: latitude,
-                        longitude: longitude,
-                        latitudeDelta: 0.005,
-                        longitudeDelta: 0.005,
-                    }}
-                >
-                    <Marker
-                        coordinate={{
+                {latitude !== 0.0 && longitude !== 0.0 ? (
+                    <MapView
+                        style={styles.map}
+                        initialRegion={{
                             latitude: latitude,
                             longitude: longitude,
+                            latitudeDelta: 0.005,
+                            longitudeDelta: 0.005,
                         }}
-                    />
-                </MapView>
-            ) : (
-                <Loading text={"GPS 데이터를 불러오는 중입니다."} />
-            )}
+                    >
+                        <Marker
+                            coordinate={{
+                                latitude: latitude,
+                                longitude: longitude,
+                            }}
+                        />
+                    </MapView>
+                ) : (
+                    <Loading text={"GPS 데이터를 불러오는 중입니다."} />
+                )}
+            </SafeAreaView>
         </View>
     );
 };
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     },
     map: {
         width: "100%",
-        height: "100%",
+        height: "80%",
     },
 });
 
